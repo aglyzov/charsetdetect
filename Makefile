@@ -1,13 +1,25 @@
 
-.PHONY: build clean
+.PHONY: test build install clean
 
-build:	libcharsetdetect/build/libcharsetdetect.a
+test:	build
+	@echo
+	@echo "Testing Go package"
+	@echo "------------------"
+	go test -v
+
+build:	libcharsetdetect/build/libcharsetdetect.dylib
 	@echo
 	@echo "Building Go package"
 	@echo "-------------------"
 	go build -v -x
 
-libcharsetdetect/build/libcharsetdetect.a: libcharsetdetect/Makefile
+install:	build
+	@echo
+	@echo "Installing Go package"
+	@echo "---------------------"
+	go install -x
+
+libcharsetdetect/build/libcharsetdetect.dylib: libcharsetdetect/Makefile
 	@echo
 	@echo "Building libcharsetdetect"
 	@echo "-------------------------"
